@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Sales Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .slider-container {
+            margin: 20px 0;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Honey Sales Tracker</h1>
+    <p>Total Honey Available: <span id="total">130</span> kg</p>
+
+    <div class="slider-container">
+        <input type="number" id="saleAmount" min="1" max="130" value="1">
+        <button class="button" onclick="registerSale()">Register Sale</button>
+    </div>
+
+    <p>Remaining Honey: <span id="remaining">130</span> kg</p>
+
+    <script>
+        let totalHoney = 130;
+
+        function registerSale() {
+            const saleAmount = parseInt(document.getElementById('saleAmount').value);
+            totalHoney -= saleAmount;
+            document.getElementById('remaining').innerText = totalHoney;
+
+            // Reset the input field and slider max value
+            document.getElementById('saleAmount').max = totalHoney;
+            if (totalHoney === 0) {
+                document.getElementById('saleAmount').value = 0;
+            } else {
+                document.getElementById('saleAmount').value = Math.min(1, totalHoney);
+            }
+        }
+    </script>
+</body>
+</html>
